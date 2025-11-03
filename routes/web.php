@@ -23,4 +23,4 @@ Route::middleware('auth')->group(function () {
     Route::post('/api/sales', [POSController::class, 'processSale']);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
