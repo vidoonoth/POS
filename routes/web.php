@@ -23,4 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/api/sales', [POSController::class, 'processSale']);
 });
 
+// Receipt Route
+Route::get('/pos/receipt/{sale}', [POSController::class, 'showReceipt'])->name('pos.receipt');
+
 require __DIR__ . '/auth.php';

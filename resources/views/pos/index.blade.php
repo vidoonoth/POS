@@ -244,6 +244,7 @@
                                         cart = [];
                                         updateCartDisplay();
                                         closePaymentModal();
+                                        window.location.href = `/pos/receipt/${data.sale_id}`; // Redirect to receipt
                                     },
                                     onPending: function(result) {
                                         /* You may add your own implementation here */
@@ -252,6 +253,7 @@
                                         cart = [];
                                         updateCartDisplay();
                                         closePaymentModal();
+                                        window.location.href = `/pos/receipt/${data.sale_id}`; // Redirect to receipt
                                     },
                                     onError: function(result) {
                                         /* You may add your own implementation here */
@@ -294,6 +296,7 @@
                             cart = [];
                             updateCartDisplay();
                             closePaymentModal();
+                            window.location.href = `/pos/receipt/${data.sale_id}`; // Redirect to receipt
                         })
                         .catch(error => {
                             console.error('Error:', error);

@@ -26,6 +26,12 @@ class POSController extends Controller
         return response()->json($product);
     }
 
+    public function showReceipt(Sale $sale)
+    {
+        $sale->load('user', 'details.product'); // Eager load relationships
+        return view('pos.receipt', compact('sale'));
+    }
+
     public function processSale(Request $request)
     {
         $request->validate([
@@ -101,11 +107,11 @@ class POSController extends Controller
 
                 DB::commit();
                 Log::info('Midtrans Snap Token generated: ' . $snapToken); // Add logging
-                return response()->json(['message' => 'Sale processed successfully', 'snap_token' => $snapToken]);
+                return response()->json(['message' => 'Sale processed successfully', 'snap_token' => $snapToken, 'sale_id' => $sale->id]);
             }
 
             DB::commit();
-            return response()->json(['message' => 'Sale processed successfully']);
+            return response()->json(['message' => 'Sale processed successfully', 'sale_id' => $sale->id]);
 
         } catch (\Exception $e) {
             DB::rollBack();
