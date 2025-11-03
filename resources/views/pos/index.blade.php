@@ -97,6 +97,10 @@
     </div>
 
     @push('scripts')
+        <!-- Midtrans Snap JS -->
+        <script type="text/javascript"
+                src="https://app.sandbox.midtrans.com/snap/snap.js"
+                data-client-key="{{ config('midtrans.client_key') }}"></script>
         <script>
             let cart = [];
 
@@ -130,7 +134,7 @@
                             cart.push({
                                 id: product.id,
                                 name: product.name,
-                                price: product.price,
+                                price: parseFloat(product.price), // Ensure price is a number
                                 quantity: 1
                             });
                         }
@@ -194,8 +198,10 @@
 
             function updateTotals() {
                 const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                const tax = subtotal * 0.1;
-                const total = subtotal + tax;
+                const total = subtotal; // No tax
+
+                console.log('Subtotal:', subtotal, 'Type:', typeof subtotal);
+                console.log('Total:', total, 'Type:', typeof total);
 
                 document.getElementById('subtotal').textContent = `Rp${subtotal.toFixed(2)}`;
                 document.getElementById('total').textContent = `Rp${total.toFixed(2)}`;
@@ -215,32 +221,86 @@
 
             function selectPaymentMethod(method) {
                 console.log('Selected payment method:', method);
-                // Here you would typically send the order with the selected payment method
-                // For now, we'll just simulate the order processing
-
-                fetch('/api/sales', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({
-                            items: cart,
-                            payment_method: method
+                if (method === 'online') {
+                    fetch('/api/sales', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({
+                                items: cart,
+                                payment_method: method
+                            })
                         })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert('Order processed successfully with ' + method + ' payment!');
-                        cart = [];
-                        updateCartDisplay();
-                        closePaymentModal();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('Error processing order');
-                        closePaymentModal();
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.snap_token) {
+                                snap.pay(data.snap_token, {
+                                    onSuccess: function(result) {
+                                        /* You may add your own implementation here */
+                                        alert("Payment success!");
+                                        console.log(result);
+                                        cart = [];
+                                        updateCartDisplay();
+                                        closePaymentModal();
+                                    },
+                                    onPending: function(result) {
+                                        /* You may add your own implementation here */
+                                        alert("Waiting for your payment!");
+                                        console.log(result);
+                                        cart = [];
+                                        updateCartDisplay();
+                                        closePaymentModal();
+                                    },
+                                    onError: function(result) {
+                                        /* You may add your own implementation here */
+                                        alert("Payment failed!");
+                                        console.log(result);
+                                        closePaymentModal();
+                                    },
+                                    onClose: function() {
+                                        /* You may add your own implementation here */
+                                        alert('You closed the popup without finishing the payment');
+                                        closePaymentModal();
+                                    }
+                                });
+                            } else {
+                                alert('Error: Snap token not received.');
+                                closePaymentModal();
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error processing order for online payment');
+                            closePaymentModal();
+                        });
+                } else {
+                    // For cash payment, proceed directly
+                    fetch('/api/sales', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            },
+                            body: JSON.stringify({
+                                items: cart,
+                                payment_method: method
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            alert('Order processed successfully with ' + method + ' payment!');
+                            cart = [];
+                            updateCartDisplay();
+                            closePaymentModal();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Error processing order for cash payment');
+                            closePaymentModal();
+                        });
+                }
             }
         </script>
     @endpush

@@ -14,16 +14,16 @@ class Sale extends Model
         'customer_id',
         'invoice_number',
         'total_amount',
-        'tax',
         'discount',
         'final_amount',
         'status',
         'notes',
+        'payment_method',
+        'midtrans_snap_token',
     ];
 
     protected $casts = [
         'total_amount' => 'decimal:2',
-        'tax' => 'decimal:2',
         'discount' => 'decimal:2',
         'final_amount' => 'decimal:2',
     ];
