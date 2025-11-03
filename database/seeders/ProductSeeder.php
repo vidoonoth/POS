@@ -14,59 +14,37 @@ class ProductSeeder extends Seeder
         $categories = Category::all();
 
         $products = [
-            // Electronics
+
             [
                 'category_id' => 1,
-                'name' => 'Smartphone X',
+                'name' => 'Americano',
                 'sku' => 'SMX001',
-                'description' => 'Latest smartphone model',
-                'price' => 599.99,
-                'stock' => 50
+                'description' => 'americano coffee best seller',
+                'price' => 30.000,
             ],
             [
                 'category_id' => 1,
-                'name' => 'Wireless Earbuds',
-                'sku' => 'WEB002',
-                'description' => 'High-quality wireless earbuds',
-                'price' => 79.99,
-                'stock' => 100
-            ],
-            // Food & Beverages
-            [
-                'category_id' => 2,
                 'name' => 'Coffee Premium',
                 'sku' => 'COF001',
                 'description' => 'Premium ground coffee',
-                'price' => 12.99,
-                'stock' => 200
+                'price' => 80.000,
             ],
-            // Clothing
+            // coffee
             [
-                'category_id' => 3,
-                'name' => 'T-Shirt Basic',
-                'sku' => 'TSB001',
-                'description' => 'Cotton basic t-shirt',
-                'price' => 19.99,
-                'stock' => 150
+                'category_id' => 1,
+                'name' => 'Espresso',
+                'sku' => 'COF002',
+                'description' => 'Strong and bold espresso',
+                'price' => 21.000,
             ],
-            // Stationery
             [
-                'category_id' => 4,
-                'name' => 'Notebook Set',
-                'sku' => 'NBS001',
-                'description' => 'Premium notebook set',
-                'price' => 9.99,
-                'stock' => 300
+                'category_id' => 1,
+                'name' => 'Cappuccino',
+                'sku' => 'COF003',
+                'description' => 'Creamy cappuccino with foam',
+                'price' => 25.000,
             ],
-            // Home & Living
-            [
-                'category_id' => 5,
-                'name' => 'LED Lamp',
-                'sku' => 'LED001',
-                'description' => 'Modern LED desk lamp',
-                'price' => 29.99,
-                'stock' => 75
-            ],
+
         ];
 
         foreach ($products as $product) {

@@ -11,25 +11,10 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             [
-                'name' => 'Electronics',
-                'description' => 'Electronic devices and accessories'
+                'name' => 'Coffee',
+                'description' => 'Coffee products',
             ],
-            [
-                'name' => 'Food & Beverages',
-                'description' => 'Food and drink items'
-            ],
-            [
-                'name' => 'Clothing',
-                'description' => 'Apparel and accessories'
-            ],
-            [
-                'name' => 'Stationery',
-                'description' => 'Office and school supplies'
-            ],
-            [
-                'name' => 'Home & Living',
-                'description' => 'Household items and decorations'
-            ],
+
         ];
 
         foreach ($categories as $category) {
