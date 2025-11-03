@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\POSController;
+use App\Http\Controllers\OrderHistoryController; // Import the new controller
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,5 +26,10 @@ Route::middleware('auth')->group(function () {
 
 // Receipt Route
 Route::get('/pos/receipt/{sale}', [POSController::class, 'showReceipt'])->name('pos.receipt');
+
+// Order History Route
+Route::middleware(['auth'])->group(function () {
+    Route::get('/history-order', [OrderHistoryController::class, 'index'])->name('history-order.index');
+});
 
 require __DIR__ . '/auth.php';

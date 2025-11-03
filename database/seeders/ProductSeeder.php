@@ -21,13 +21,15 @@ class ProductSeeder extends Seeder
                 'sku' => 'SMX001',
                 'description' => 'americano coffee best seller',
                 'price' => 30.000,
+                'image' => 'product/coffee/americano.png',
             ],
             [
                 'category_id' => 1,
-                'name' => 'Coffee Premium',
+                'name' => 'Macchiato',
                 'sku' => 'COF001',
-                'description' => 'Premium ground coffee',
+                'description' => 'Macchiato coffee',
                 'price' => 80.000,
+                'image' => 'product/coffee/macchiato.png',
             ],
             // coffee
             [
@@ -36,6 +38,7 @@ class ProductSeeder extends Seeder
                 'sku' => 'COF002',
                 'description' => 'Strong and bold espresso',
                 'price' => 21.000,
+                'image' => 'product/coffee/espresso.png',
             ],
             [
                 'category_id' => 1,
@@ -43,8 +46,17 @@ class ProductSeeder extends Seeder
                 'sku' => 'COF003',
                 'description' => 'Creamy cappuccino with foam',
                 'price' => 25.000,
+                'image' => 'product/coffee/cappuccino.png',
             ],
-
+            // mochaccino
+            [
+                'category_id' => 1,
+                'name' => 'Mochaccino',
+                'sku' => 'COF004',
+                'description' => 'Delicious chocolate flavored coffee',
+                'price' => 28.000,
+                'image' => 'product/coffee/mochaccino.png',
+            ],
         ];
 
         foreach ($products as $product) {
