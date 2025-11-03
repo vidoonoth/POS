@@ -75,6 +75,27 @@
         </div>
     </div>
 
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <h3 class="text-lg font-bold mb-4">Select Payment Method</h3>
+            <div class="flex flex-col space-y-4">
+                <button onclick="selectPaymentMethod('cash')"
+                        class="w-full px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                    Cash
+                </button>
+                <button onclick="selectPaymentMethod('online')"
+                        class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                    Online Payment
+                </button>
+                <button onclick="closePaymentModal()"
+                        class="w-full px-4 py-2 bg-gray-400 text-white rounded-md hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
     @push('scripts')
         <script>
             let cart = [];
@@ -142,7 +163,7 @@
                         </div>
                     </div>
                     <div class="text-right">
-                        <p>$${(item.price * item.quantity).toFixed(2)}</p>
+                        <p>Rp${(item.price * item.quantity).toFixed(2)}</p>
                         <button onclick="removeFromCart(${item.id})"
                                 class="text-red-600 text-sm hover:text-red-700">Remove</button>
                     </div>
@@ -176,8 +197,8 @@
                 const tax = subtotal * 0.1;
                 const total = subtotal + tax;
 
-                document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-                document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+                document.getElementById('subtotal').textContent = `Rp${subtotal.toFixed(2)}`;
+                document.getElementById('total').textContent = `Rp${total.toFixed(2)}`;
             }
 
             function processOrder() {
@@ -185,6 +206,17 @@
                     alert('Cart is empty!');
                     return;
                 }
+                document.getElementById('paymentModal').classList.remove('hidden');
+            }
+
+            function closePaymentModal() {
+                document.getElementById('paymentModal').classList.add('hidden');
+            }
+
+            function selectPaymentMethod(method) {
+                console.log('Selected payment method:', method);
+                // Here you would typically send the order with the selected payment method
+                // For now, we'll just simulate the order processing
 
                 fetch('/api/sales', {
                         method: 'POST',
@@ -193,18 +225,21 @@
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                         },
                         body: JSON.stringify({
-                            items: cart
+                            items: cart,
+                            payment_method: method
                         })
                     })
                     .then(response => response.json())
                     .then(data => {
-                        alert('Order processed successfully!');
+                        alert('Order processed successfully with ' + method + ' payment!');
                         cart = [];
                         updateCartDisplay();
+                        closePaymentModal();
                     })
                     .catch(error => {
                         console.error('Error:', error);
                         alert('Error processing order');
+                        closePaymentModal();
                     });
             }
         </script>
