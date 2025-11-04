@@ -33,8 +33,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/history-order', [OrderHistoryController::class, 'index'])->name('history-order.index');
 });
 
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
 });
 
 require __DIR__ . '/auth.php';

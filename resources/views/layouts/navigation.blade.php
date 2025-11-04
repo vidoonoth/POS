@@ -7,7 +7,9 @@
                 @can('dashboard')
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                            <div class="text-2xl font-bold ">
+                                <p class="">Admin Panel</p>
+                            </div>
                         </a>
                     </div>
                 @endcan
@@ -20,13 +22,6 @@
                 @endcan
 
                 <!-- Navigation Links -->
-                @can('dashboard')
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
-                    </div>
-                @endcan
                 @can('order history')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('history-order.index')" :active="request()->routeIs('history-order.index')">
