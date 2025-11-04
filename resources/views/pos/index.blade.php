@@ -22,7 +22,7 @@
                                     data-name="{{ strtolower($product->name) }}"
                                     data-category="{{ strtolower($product->category->name) }}">
                                     <div
-                                        class="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 mb-4">
+                                        class="h-40 overflow-hidden rounded-lg bg-gray-200 mb-4">
                                         @if ($product->image)
                                             <img src="{{ asset('storage/' . $product->image) }}"
                                                 alt="{{ $product->name }}"
