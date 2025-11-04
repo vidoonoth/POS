@@ -28,10 +28,56 @@
                                 <p class="text-3xl font-bold">{{ $saleCount ?? 0 }}</p>
                             </div>
                         </div>
+
+                        <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold mb-4">Sales Over Last 7 Days</h3>
+                            <canvas id="salesChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        @push('scripts')
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const ctx = document.getElementById('salesChart').getContext('2d');
+                    const salesChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: @json($labels),
+                            datasets: [{
+                                label: 'Total Sales (Rp)',
+                                data: @json($data),
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderWidth: 1,
+                                fill: true
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    title: {
+                                        display: true,
+                                        text: 'Total Sales (Rp)'
+                                    }
+                                },
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: 'Date'
+                                    }
+                                }
+                            }
+                        }
+                    });
+                });
+            </script>
+        @endpush
     </x-app-layout>
 @endcan
 
