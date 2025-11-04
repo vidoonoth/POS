@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Sale;
-use App\Models\SaleDetail;
 use App\Models\User;
-use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Customer;
+use App\Models\SaleDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
@@ -30,7 +31,8 @@ class SaleController extends Controller
         $users = User::all();
         $customers = Customer::all();
         $products = Product::all();
-        return view('admin.sales.create', compact('users', 'customers', 'products'));
+        $invoiceNumber = 'INV-' . time() . '-' . Auth::id(); // Generate a unique invoice number
+        return view('admin.sales.create', compact('users', 'customers', 'products', 'invoiceNumber'));
     }
 
     /**
@@ -107,7 +109,8 @@ class SaleController extends Controller
         $customers = Customer::all();
         $products = Product::all();
         $sale->load('details');
-        return view('admin.sales.edit', compact('sale', 'users', 'customers', 'products'));
+        $invoiceNumber = $sale->invoice_number; // Use existing invoice number for edit
+        return view('admin.sales.edit', compact('sale', 'users', 'customers', 'products', 'invoiceNumber'));
     }
 
     /**
