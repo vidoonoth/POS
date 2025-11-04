@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
+    Route::resource('sales', \App\Http\Controllers\Admin\SaleController::class);
 });
 
 require __DIR__ . '/auth.php';
