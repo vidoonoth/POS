@@ -22,12 +22,14 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'order history']);
         Permission::firstOrCreate(['name' => 'manage admin']);
         Permission::firstOrCreate(['name' => 'manage profile']);
+        Permission::firstOrCreate(['name' => 'sidebar admin']);
 
         // Assign permissions to roles
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $kasirRole = Role::firstOrCreate(['name' => 'kasir']);
 
         $adminRole->givePermissionTo([
+            'sidebar admin',
             'dashboard',
             'manage admin',
             'manage profile',

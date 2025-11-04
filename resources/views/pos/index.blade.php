@@ -5,18 +5,18 @@
         </h2>
     </x-slot> --}}
 
-    <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-4">
+        <div class="max-w-[84rem] h-full mx-auto sm:px-6 lg:px-8">
             <div class="flex gap-6">
                 <!-- Products Grid -->
                 <div class="w-2/3 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
+                    <div class="p-4 text-gray-900">
                         <div class="mb-4">
                             <input type="text"
                                 class="w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 placeholder="Search products..." id="searchInput" onkeyup="filterProducts()">
                         </div>
-                        <div class="grid grid-cols-3 gap-4" id="productsGrid">
+                        <div class="grid grid-cols-3 gap-4 max-h-[23rem] overflow-y-auto" id="productsGrid">
                             @foreach ($products as $product)
                                 <div class="border rounded-lg p-4 hover:shadow-lg transition-shadow product-card"
                                     data-name="{{ strtolower($product->name) }}"
