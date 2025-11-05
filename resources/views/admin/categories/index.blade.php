@@ -21,9 +21,9 @@
                         </div>
                     @endif
 
-                    <div class="overflow-x-auto overflow-y-auto max-h-96">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50 sticky top-0">
+                    <div class="mt-4">
+                        <table id="categoriesTable" class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         No
@@ -69,4 +69,12 @@
             </div>
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#categoriesTable').DataTable();
+            });
+        </script>
+    @endpush
 </x-app-layout>
