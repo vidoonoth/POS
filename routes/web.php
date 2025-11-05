@@ -38,6 +38,7 @@ Route::middleware(['auth', 'can:admin'])->prefix('admin')->name('admin.')->group
     Route::resource('products', \App\Http\Controllers\Admin\ProductController::class);
     Route::resource('sales', \App\Http\Controllers\Admin\SaleController::class);
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::resource('settings', \App\Http\Controllers\Admin\SettingController::class)->middleware('can:manage settings');
 });
 
 require __DIR__ . '/auth.php';

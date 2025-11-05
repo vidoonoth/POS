@@ -5,5 +5,8 @@
         <a href="{{ route('admin.products.index') }}" class="block py-2 px-4 rounded hover:bg-gray-700">Products</a>
         <a href="{{ route('admin.sales.index') }}" class="block py-2 px-4 rounded hover:bg-gray-700">Sales</a>
         <a href="{{ route('admin.users.index') }}" class="block py-2 px-4 rounded hover:bg-gray-700">Users</a>
+        @can('manage settings')
+        <a href="{{ route('admin.settings.index') }}" class="block py-2 px-4 rounded hover:bg-gray-700">Settings</a>
+        @endcan
     </nav>
 </div>

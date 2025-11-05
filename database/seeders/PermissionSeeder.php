@@ -24,6 +24,7 @@ class PermissionSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'manage profile']);
         Permission::firstOrCreate(['name' => 'sidebar admin']);
         Permission::firstOrCreate(['name' => 'admin']);
+        Permission::firstOrCreate(['name' => 'manage settings']);
 
         // Assign permissions to roles
         $adminRole = Role::firstOrCreate(['name' => 'admin']);
@@ -35,6 +36,7 @@ class PermissionSeeder extends Seeder
             'dashboard',
             'manage admin',
             'manage profile',
+            'manage settings',
         ]);
 
         $kasirRole->givePermissionTo([

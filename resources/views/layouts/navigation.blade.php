@@ -4,11 +4,11 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                @can('dashboard')
+                @can('admin')
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}">
                             <div class="text-2xl font-bold ">
-                                <p class="">Admin Panel</p>
+                                <p class="">{{ $siteName }}</p>
                             </div>
                         </a>
                     </div>
