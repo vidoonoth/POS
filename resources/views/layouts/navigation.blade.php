@@ -8,7 +8,7 @@
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}">
                             <div class="text-2xl font-bold ">
-                                <p class="">{{ $siteName }}</p>
+                                <p class="">Admin Panel</p>
                             </div>
                         </a>
                     </div>
@@ -16,7 +16,7 @@
                 @can('pos')
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('pos.index') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                            <p class="font-bold text-xl">{{ $siteName }}</p>
                         </a>
                     </div>
                 @endcan
