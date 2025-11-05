@@ -26,7 +26,7 @@
                             <thead class="bg-gray-50 sticky top-0">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        ID
+                                        No
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Image
@@ -52,7 +52,7 @@
                                 @foreach ($products as $product)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $product->id }}
+                                            {{ $loop->iteration }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             @if ($product->image)
@@ -71,7 +71,7 @@
                                             {{ $product->sku }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            Rp{{ number_format($product->price, 2, ',', '.') }}
+                                            {{ $product->price }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <a href="{{ route('admin.products.show', $product->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-2">View</a>

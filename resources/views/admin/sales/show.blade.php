@@ -10,7 +10,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="mb-4">
-                        <p class="text-sm font-medium text-gray-700"><strong>ID:</strong> {{ $sale->id }}</p>
                     </div>
                     <div class="mb-4">
                         <p class="text-sm font-medium text-gray-700"><strong>Invoice Number:</strong> {{ $sale->invoice_number }}</p>

@@ -10,7 +10,6 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="mb-4">
-                        <p class="text-sm font-medium text-gray-700"><strong>ID:</strong> {{ $product->id }}</p>
                     </div>
                     <div class="mb-4">
                         <p class="text-sm font-medium text-gray-700"><strong>Category:</strong> {{ $product->category->name ?? 'N/A' }}</p>

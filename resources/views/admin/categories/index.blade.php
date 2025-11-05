@@ -26,7 +26,7 @@
                             <thead class="bg-gray-50 sticky top-0">
                                 <tr>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        ID
+                                        No
                                     </th>
                                     <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Name
@@ -43,7 +43,7 @@
                                 @foreach ($categories as $category)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap">
-                                            {{ $category->id }}
+                                            {{ $loop->iteration }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             {{ $category->name }}
